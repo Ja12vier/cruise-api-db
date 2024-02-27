@@ -13,7 +13,6 @@ productsincartRouter.route("/")
 productsincartRouter.route("/:id")
 
 .get(productsincartMiddleware.existProductsinCart,getOne)
-.delete(verifyJWT,productsincartMiddleware.buscartRemobeProduct,remove)
 .delete(verifyJWT, removeDefinitivo)
 .put(verifyJWT,productsincartMiddleware.existProductsinCart,update)
 

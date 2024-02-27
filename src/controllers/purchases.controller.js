@@ -30,12 +30,8 @@ const create=catchError(async(req, res)=>{
 
      const Purchase=await purchases.bulkCreate(productSinCart)
                     await productsinCarts.destroy({where: {userId}})
+              
 
-     
-    
-
-  
-       
    return res.status(201).json({
         status: "sucess",
         result: "the  Productsincart has been created",
@@ -45,10 +41,24 @@ const create=catchError(async(req, res)=>{
 
 });
 
+
+const remove=catchError(async(req, res)=>{
+    const {id}=req.params
+
+    await purchases.destroy({where: {id}})
+    return res.status(204).json({
+        status:"sucess",
+        result: "the product has  been deleted  ",
+        
+     })
+
+ })
+
+
 module.exports={
     getAll,
  
     create,
-    
+    remove
     
 }

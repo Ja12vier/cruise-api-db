@@ -22,6 +22,7 @@ const create=catchError(async(req, res)=>{
     const Cart=await carts.create({
         userId
     });
+   
     return res.status(201).json({
         status: "sucess",
         result: "the  Cart has been created",
@@ -41,7 +42,11 @@ const getOne=catchError(async(req, res)=>{
 
 const remove=catchError(async(req, res)=>{
     const {Cart}=req;
+    const userId=req.user.id  
+    console.log(userId);
     await Cart.update({status: false})
+
+    await productsinCarts.destroy({where: {userId}})
     return res.status(200).json({
        status:"sucess",
        result: "the  Cart has  been deleted  ",

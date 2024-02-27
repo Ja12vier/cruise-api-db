@@ -1,4 +1,4 @@
-const {getAll, create}=require("../controllers/purchases.controller");
+const {getAll, create, remove}=require("../controllers/purchases.controller");
 const express=require("express");
 const verifyJWT = require("../utils/verifyJWT");
 const { verify } = require("jsonwebtoken");
@@ -10,5 +10,6 @@ purchaseRouter.route("/")
 .post(verifyJWT,create)
 
 
-
+purchaseRouter.route("/:id")
+.delete(verifyJWT, remove)
 module.exports=purchaseRouter

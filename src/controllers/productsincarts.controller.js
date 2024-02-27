@@ -45,7 +45,7 @@ const create=catchError(async(req, res)=>{
 
 const getOne=catchError(async(req, res)=>{
    const {Productsincart}=req
-     
+     console.log(req);
    return res.status(200).json({
     status: "sucess",
     Productsincart

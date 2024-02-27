@@ -66,8 +66,8 @@ exports.existPoducCart=catchError(async(req, res, next)=>{
   if(carrito==null){
   next()
   }else if (carrito.product.dataValues.status==false) {
-    carrito.product.dataValues.status=true
-    carrito.product.save()
+  let productCart=carrito.product.dataValues
+   await productCart.update({status:true})
   return res.status(200).json({message: "este producto se encontraba pero removido ya se agrego al carrito"})
   }else{
     return res.status(201).json({message: "este producto se encuentra en el carrito"})
@@ -78,25 +78,6 @@ exports.existPoducCart=catchError(async(req, res, next)=>{
 })
 
 
-exports.buscartRemobeProduct=catchError(async(req, res, next)=>{
-   const {id}=req.params
-  
-  const remoProduct= await productsinCarts.findOne({
-
-    include:[{
-      model: products,
-
-    }],
-    where: {productId:id}})
-    
-         
-     const productRemover=remoProduct.dataValues.product.dataValues.status=false
-     remoProduct.dataValues.product.save()
-    
-     req.productsincart=productRemover
-  
-    next()
-})
 
 
 

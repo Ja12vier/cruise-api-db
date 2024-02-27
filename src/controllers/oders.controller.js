@@ -20,7 +20,9 @@ const getAll=catchError(async(req, res)=>{
 
 
 const create=catchError(async(req, res)=>{
+    
     const {userId, cartId, totalPrice}=req.body;
+    
     const Order=await orders.create({
         userId,
         cartId,
